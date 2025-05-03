@@ -1,10 +1,12 @@
-package com.rdurbina.snippethub.dto;
+package com.rdurbina.snippethub.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 
-public record UserDto(
+@Builder
+public record UserRequest(
         Long id,
         @NotBlank(message = "The username can't be blank.")
         @Pattern(
@@ -15,9 +17,10 @@ public record UserDto(
         @Email(message = "Please, enter a valid email address.")
         String email,
         @Pattern(
-                regexp = "^(?=.*[A-Z])(?=.*\\d).{6,}$",
+                regexp = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{6,}$",
                 message = "Password must be at least 6 characters long, contain a capital letter and a at least one " +
                         "number."
         )
         String password
-) {}
+) {
+}
